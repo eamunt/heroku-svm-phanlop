@@ -14,35 +14,35 @@ def index():
     return render_template("index.html")
 
 @app.route('/dauvao', methods=['POST'])
-def analyze():
+def dauvao():
     if request.method == 'POST':
-        female = request.form['gioitinh']
-        if female == "0":
-            gender = "Nam"
-        elif female == "1":
-            gender = "Nữ"
+        gioitinh = request.form['gioitinh']
         diemToan = request.form['diemToan']
         diemVan = request.form['diemVan']
         model = request.form['model']
         sample_data = [gioitinh, diemToan, diemVan]
         clean_data = [float(i) for i in sample_data]
         ex1 = np.array(clean_data).reshape(1,-1)
-        if model == "svc-linear":
-            ic_model = joblib.load("data/_model_icecream.pkl")
-        elif model == "bayes":
-            ic_model = joblib.load("data/nb_model_icecream.pkl")
-        elif model == "knn":
-            ic_model = joblib.load("data/knn_model_icecream.pkl")
+        if model == "svc-polynomial":
+            ic_model = joblib.load("data/svc_poly_model_df.pkl")
+        elif model == "svc-rbf":
+            ic_model = joblib.load("data/svc_rbf_model_df.pkl")
         result_prediction = ic_model.predict(ex1)
+
         if result_prediction == [1]:
-            result_prediction = "Vanilla"
+            result_prediction = "Nhóm 1"
         elif result_prediction == [2]:
-            result_prediction = "Chocolate"
+            result_prediction = "Nhóm 2"
         elif result_prediction == [3]:
-            result_prediction = "Strawberry"
+            result_prediction = "Nhóm 3"
+
+        if gioitinh == "0":
+            gender = "Nam"
+        elif gioitinh == "1":
+            gender = "Nữ"
     return render_template("index.html", gender=gender,
-        video=video,
-        puzzle=puzzle,
+        diemToan=diemToan,
+        diemVan=diemVan,
         clean_data=clean_data,
         result_prediction=result_prediction)
 

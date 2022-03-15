@@ -1,38 +1,38 @@
 {% extends "material/base.html" %}
 {% block content %}
-<div style="margin: 0 auto; width: 50%;">
-    <h3>Ice Cream Predictor</h3>
-    <h4>Please enter input:</h4>
+<div style="margin: 0 auto; width: 50%; background-color: skyblue;">
+    <h3>Bài tập nhóm lần 1</h3>
+    <h4>Dự đoán thuộc nhóm nào ?</h4>
     <form action="{{url_for('dauvao')}}" method="post">
         
         <table>
             <tr>
-                <td><label for="diemToan">Điểm Toán:</label></td>
-                <td><input type="text" id="diemToan" name="diemToan"></td>
+                <td><label style="font-size: 30px;" for="diemToan">Điểm Toán:</label></td>
+                <td><input type="number" id="diemToan" name="diemToan"></td>
             </tr>
             <tr>
-                <td><label for="diemVan">Điểm Văn:</label></td>
-                <td><input type="text" id="diemVan" name="diemVan"></td>
+                <td><label style="font-size: 30px;" for="diemVan">Điểm Văn:</label></td>
+                <td><input type="number" id="diemVan" name="diemVan"></td>
             </tr>
             <tr>
                 <p>Model:</p>
-                <input type="radio" id="id-svc-linear" name="model" value="svc-linear">
-                <label for="id-svc-linear">SVC-linear</label><br>
-                <input type="radio" id="nb" name="model" value="bayes">
-                <label for="nb">Naive Bayes</label><br>
-                <input type="radio" id="knn" name="model" value="knn">
-                <label for="knn">KNN</label>
+                <input type="radio" id="id-svc-poly" name="model" value="svc-polynomial" checked>
+                <label for="id-svc-poly">SVC-polynomial</label><br>
+                <input type="radio" id="id-svc-rbf" name="model" value="svc-rbf">
+                <label for="id-svc-rbf">SVC-rbf</label><br>
             </tr>
             <tr>
-                
-                <p>Giới tính:</p>
-                <input type="radio" id="nam" name="gioitinh" value="0">
-                <label for="nam">Nam</label><br>
-                <input type="radio" id="nu" name="gioitinh" value="1">
-                <label for="nu">Nữ</label><br>
+                <td>
+                    <label style="font-size: 30px;" for="gioitinh">Chọn giới tính:</label>
+                    <td>
+                        <select style="display: block;" name="gioitinh" id="gioitinh">
+                            <option style="font-size: 30px;" value="0">Nam</option>
+                            <option style="font-size: 30px;" value="1" selected>Nữ</option>
+                        </select>
+                    </td>
+                </td>
             </tr>
             <tr>
-                <td></td>
                 <td>
                     <input type="submit" name="submit" type="submit" value="Predict">
                     <input type="reset" name="reset" value="Clear">
@@ -45,7 +45,7 @@
         <li>Điểm Toán: {{ diemToan }}</li>
         <li>Điểm Văn: {{ diemVan }}</li>
     </ul>
-    <h4>Your class is: {{ result_prediction }} </h4>
+    <h4>Được xếp vào nhóm: {{ result_prediction }} </h4>
 </div>
 {% endblock %}
 {% block scripts %}
