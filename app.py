@@ -11,7 +11,7 @@ Material(app)
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("index1.html")
 
 @app.route('/dauvao', methods=['POST'])
 def dauvao():
@@ -26,8 +26,9 @@ def dauvao():
             normal_data = [gioitinh, diemToan, diemVan]
             #convert
             float_data = [float(i) for i in normal_data]
+            print(float_data)
             t = np.array(float_data).reshape(1,-1)
-            print(t)
+            
             if model == "svc-polynomial":
                 s_model = joblib.load("data/svc_poly_model_df.pkl")
             elif model == "svc-rbf":
@@ -48,13 +49,13 @@ def dauvao():
                 gender = "Nữ"
 
 
-        return render_template("index.html", gender=gender,
+        return render_template("index1.html", gender=gender,
             diemToan=diemToan,
             diemVan=diemVan,
             result_prediction=result_prediction)
     
     except:
-        return render_template("index.html",
+        return render_template("index1.html",
             result_prediction="Chưa nhập đủ dữ liệu")
 
 

@@ -27,15 +27,15 @@ X_train, X_test, y_train, y_test = train_test_split(X_new, y, test_size=0.3, ran
 smt = SMOTE(random_state=102)
 X_train, y_train = smt.fit_resample(X_train, y_train)
 
-# Xây dựng mô hình với mô hình svc-rbf
+# Xây dựng bằng mô hình svc-rbf
 rbf_svc = SVC(kernel='rbf', C = 1000, gamma=100)
 rbf_svc.fit(X_train, y_train)
 # Dự đoán nhãn tập kiểm tra
 y_pred = rbf_svc.predict(X_test)
-
+print("y_pred:",y_pred)
 # accuracy score svc-rbf
 a_s = accuracy_score(y_test, y_pred)
-print(a_s)
+print("accuracy_score:", a_s)
 
-filename = 'svc_rbf_model_df.pkl'
-pickle.dump(rbf_svc, open(filename, 'wb'))
+#filename = 'svc_rbf_model_df.pkl'
+#pickle.dump(rbf_svc, open(filename, 'wb'))

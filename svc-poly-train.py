@@ -32,10 +32,10 @@ poly_svc = SVC(kernel='poly', C = 10)
 poly_svc.fit(X_train, y_train)
 # Dự đoán nhãn tập kiểm tra
 y_pred = poly_svc.predict(X_test)
-
+print("y_pred:", y_pred)
 # accuracy score svc-poly
 a_s = accuracy_score(y_test, y_pred)
-print(a_s)
+print("accuracy_score:", a_s)
 
-filename = 'svc_poly_model_df.pkl'
-pickle.dump(poly_svc, open(filename, 'wb'))
+#filename = 'svc_poly_model_df.pkl'
+#pickle.dump(poly_svc, open(filename, 'wb'))
